@@ -13,7 +13,7 @@ const connectDB = async () => {
         })
 
     mongoose.set('debug', function (coll, method, query, doc, options) {
-        let set = {
+        const set = {
             coll: coll,
             method: method,
             query: query,
