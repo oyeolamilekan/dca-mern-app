@@ -1,0 +1,23 @@
+const mongoose = require("mongoose")
+
+const marketSchema = mongoose.Schema({
+    name: {
+        type: String,
+        required: [true, "Please add a name"]
+    },
+    base_unit: {
+        type: String,
+        required: [true, "Please add a name"]
+    },
+    quote_unit: {
+        type: String,
+        required: [true, "Please add a name"]
+    },
+}, {timestamps: true})
+
+marketSchema.statics.findOneOrCreate = async function(condition, doc) {
+    const one = await this.findOne(condition);
+    return one || this.create(doc);
+}
+
+module.exports = mongoose.model("Market", marketSchema);
