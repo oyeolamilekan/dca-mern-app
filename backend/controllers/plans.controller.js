@@ -11,13 +11,9 @@ const createPlan = async (req, res) => {
             market: marketObj._id,
             name, amount, schedule,
         })
-        const planObj = {
-            name: plan.name,
-            schedule: plan.schedule,
-            amount: plan.amount,
-            market: marketObj.name,
-            id: plan._id
-        }
+
+        const planObj = await plan.populate("market")
+        
         return res.status(201).json({ msg: "Plan successfully created.", data: planObj })
     } catch (error) {
         return res.status(500).json({ msg: "Error in creating plan" })

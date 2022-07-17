@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 
-const ENCRYPTION_KEY = "BOhiy6CQUDfVsXwqfIze5rFXMLzI7doL";
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY; // This key must be 32
 const IV_LENGTH = 16; // For AES, this is always 16
 
 function encrypt(text) {

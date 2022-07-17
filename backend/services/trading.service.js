@@ -22,6 +22,7 @@ const buyAsset = async (secretKey, bid, ask, total) => {
         const confirmInsantOrderObj = await quidax.instantOrder.confirmInstantOrder("me", instantOrderObj.data.id)
         return confirmInsantOrderObj;
     } catch (error) {
+        console.log(error)
         return { status: 'error', message: error }
     }
 
@@ -35,13 +36,14 @@ const processDCA = async (shedule) => {
         const amount = plan.amount;
         const response = await buyAsset(decryptedKey, plan.market.quote_unit, plan.market.base_unit, amount)
         if (response.status == "success") {
+            const { status, total, fee, receive } = response.data
             await Transaction.create({
                 plan: plan.id,
                 transaction_id: response.data.id,
-                status: response.data.status,
-                total: response.data.total,
-                fee: response.data.fee,
-                receive: response.data.receive,
+                status,
+                total,
+                fee,
+                receive,
             })
         } else {
             await Transaction.create({
