@@ -1,11 +1,21 @@
 const jwt = require("jsonwebtoken")
 
+/**
+ * Generate jwt token authentication token
+ * @param {string} id 
+ * @returns {string}
+ */
 const generateJwtToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: '30d' 
     })
 }
 
+/**
+ * Generates random string to authenticate users
+ * @param {int} length 
+ * @returns {string}
+ */
 const generateId = (length) => {
     let result = '';
     const characters = '0123456789';

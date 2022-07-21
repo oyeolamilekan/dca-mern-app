@@ -2,6 +2,9 @@ const Quidax = require("quidax-node")
 const marketsModel = require("./models/markets.model")
 const logger = require("./services/logging.service")
 
+/**
+ * Loads all of the available market once the application has been initialised.
+ */
 const loadMarkets = async () => {
     try {
 

@@ -3,6 +3,14 @@ const Plans = require('../models/plans.model');
 const Transaction = require('../models/transaction.model');
 const { decrypt } = require("../services/encryption.service");
 
+/**
+ * buys an asset on behalf of the authenticated user.
+ * @param {string} secretKey 
+ * @param {string} bid 
+ * @param {string} ask 
+ * @param {string} total 
+ * @returns {string}
+ */
 const buyAsset = async (secretKey, bid, ask, total) => {
     try {
         const quidax = new Quidax(secretKey)
@@ -29,6 +37,10 @@ const buyAsset = async (secretKey, bid, ask, total) => {
 
 }
 
+/**
+ * Process the DCA plans on behalf of the user
+ * @param {string} shedule 
+ */
 const processDCA = async (shedule) => {
     const plans = await Plans.find({ schedule: shedule, isActive: true }).populate("user").populate("market")
     plans.forEach(async (plan) => {

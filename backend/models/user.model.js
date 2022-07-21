@@ -1,5 +1,12 @@
 const mongoose = require("mongoose")
 
+/**
+ * User schema
+ * 
+ * encryptedApiKey: user apikey encrypted for security
+ * name:            user full name
+ * email:           user email address
+ */
 const userSchema = mongoose.Schema({
     encryptedApiKey: {
         type: String,

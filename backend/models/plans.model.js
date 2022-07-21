@@ -1,5 +1,15 @@
 const mongoose = require("mongoose")
 
+/**
+ * Plans schema containing information about the trading strategy
+ * 
+ * user:        tied to the user.
+ * market:      the asset pair.
+ * name:        name of the plan
+ * amount:      amount scheduled to purchase
+ * isActive:    if the plan is active.
+ * schedule:    how often is the system going to buy an asset.
+ */
 const plansSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,

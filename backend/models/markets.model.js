@@ -1,5 +1,8 @@
 const mongoose = require("mongoose")
 
+/**
+ * Markets data for dca info
+ */
 const marketSchema = mongoose.Schema({
     name: {
         type: String,
