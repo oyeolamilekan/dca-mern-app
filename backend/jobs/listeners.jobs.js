@@ -1,6 +1,9 @@
 const Bull = require("bull")
 const transactionModel = require("../models/transaction.model")
 
+/**
+ * Process the data that has been added to the 'mail-queue'
+ */
 const sendEmailQueueListener = async () => {
     const emailProcessingQueue = new Bull("mail-queue")
     emailProcessingQueue.process(async (jobs) => {
@@ -12,6 +15,9 @@ const sendMail = async (data) => {
     console.log(`Done: ${data.message}`)
 }
 
+/**
+ * Process the instant order that has been added to the instant-order-final-process queue.
+ */
 const updateInstantOrderFromWebhook = async () => {
     const transactionProcessingQueue = new Bull("instant-order-final-process")
     transactionProcessingQueue.process(async (jobs) => {

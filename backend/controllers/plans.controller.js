@@ -1,7 +1,13 @@
 const marketsModel = require("../models/markets.model");
 const Plans = require("../models/plans.model");
-const logger = require("../services/logging.service");
 
+/**
+ * Authenticated account can create dollar cost average plans
+ * and set interval at which the plans are supposed to run.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const createPlan = async (req, res) => {
     try {
         const { name, market, amount, schedule } = req.body;
@@ -20,6 +26,12 @@ const createPlan = async (req, res) => {
     }
 }
 
+/**
+ * User can edit plans, update the name of the plans, price and intervals.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const editPlan = async (req, res) => {
     try {
         const { id } = req.params;
@@ -46,6 +58,12 @@ const editPlan = async (req, res) => {
 
 }
 
+/**
+ * Authenticated user can toggle plans.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const togglePlan = async (req, res) => {
     try {
         const { id } = req.params;
@@ -74,6 +92,12 @@ const togglePlan = async (req, res) => {
 
 }
 
+/**
+ * Authenticated user can fetch plans they created.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const fetchPlans = async (req, res) => {
     try {
         const page = Number(req.query.page) || 1;

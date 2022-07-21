@@ -2,8 +2,13 @@ const jwt = require("jsonwebtoken")
 
 const User = require("../models/user.model");
 
+/**
+ * The auth middleware makes sure all authenticated request are protected.
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 const protect = async (req, res, next) => {
-
     if (req.headers.authorization?.startsWith("Bearer")) {
         try {
             let token = req.headers.authorization.split(" ")[1]

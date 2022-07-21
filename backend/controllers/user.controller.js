@@ -53,7 +53,6 @@ const signinAccount = async (req, res) => {
 
         const code = generateId(5)
 
-
         if (userExists) {
             await authCode.updateOne({ _id: userExists.id }, { user: userExists, code, isUsed: false }, { upsert: true },)
             return res.status(200).json({

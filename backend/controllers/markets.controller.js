@@ -1,5 +1,11 @@
 const marketsModel = require("../models/markets.model")
 
+/**
+ * Fetchs available market data from the record.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const markets = async (req, res) => {
     try {
         const markets = await marketsModel.find();

@@ -5,6 +5,7 @@ const { processDCA } = require('../services/trading.service');
 
 startJobs = () => {
 
+    /// Execute the daily plans
     cron.schedule(constants.DAILY, async () => {
         try {
             processDCA("DAILY")
@@ -14,6 +15,7 @@ startJobs = () => {
         logger.info("Daily crons started");
     });
 
+    /// Execute the weekly plans
     cron.schedule(constants.WEEKLY, async () => {
         try {
             processDCA("WEEKLY")
@@ -23,6 +25,7 @@ startJobs = () => {
         logger.info("Weekly crons started");
     });
 
+    /// Execute the monthly plans
     cron.schedule(constants.MONTHLY, async () => {
         try {
             processDCA("MONTHLY")

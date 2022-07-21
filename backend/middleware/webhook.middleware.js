@@ -1,3 +1,9 @@
+/**
+ * Webhook middle protect the webhook route, from authenticated request.
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 const protectWebook = async (req, res, next) => {
     try {
         let webhookKey = req.headers['quidax-signature']

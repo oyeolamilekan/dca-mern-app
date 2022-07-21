@@ -1,6 +1,12 @@
 const { updateTransaction } = require("../jobs/events.jobs");
 const transactionModel = require("../models/transaction.model");
 
+/**
+ * Updates the instant record on the background.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const updateTransactionWebhook = async (req, res) => {
     try {
         const data = req.body;
@@ -19,6 +25,12 @@ const updateTransactionWebhook = async (req, res) => {
     }
 }
 
+/**
+ * Fetchs transactions related to the plan.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const fetchTransaction = async (req, res) => {
     try {
         const page = Number(req.query.page) || 1;
