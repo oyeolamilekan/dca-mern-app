@@ -23,4 +23,9 @@ const userSchema = mongoose.Schema({
     },
 }, {timestamps: true})
 
+userSchema.statics.findOneOrCreate = async function(condition, doc) {
+    const one = await this.findOne(condition);
+    return one || this.create(doc);
+}
+
 module.exports = mongoose.model("User", userSchema);

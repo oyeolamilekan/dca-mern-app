@@ -17,49 +17,25 @@ const syncUserAccount = async (req, res) => {
 
         const encryptedApiKey = encrypt(key)
 
-        const email = userInfo.data.email
+        const { email, first_name, last_name } = userInfo.data
 
-        // check if user exists
-        const userExists = await userModel.findOne({ email })
-
-        if (userExists) {
-            return res.status(401).json({
-                message: "User exist."
-            })
-        }
-
-        const user = await userModel.create({
+        const user = await userModel.findOneOrCreate({
+            "email": email,
+        }, {
             "encryptedApiKey": encryptedApiKey,
-            "email": userInfo.data.email,
-            "name": `${userInfo.data.first_name} ${userInfo.data.last_name}`
+            "email": email,
+            "name": `${first_name} ${last_name}`
         })
 
         user.save()
 
+        const code = generateId(5)
+
+        await authCode.updateOne({ _id: user.id }, { user: user, code, isUsed: false }, { upsert: true },)
+
         res.status(201).json({
             msg: "User account has been synced, kindly sign in with the email tethered the api key.",
         })
-
-    } catch (error) {
-        return res.json({ msg: "Error in sync: Server error." });
-    }
-}
-
-const signinAccount = async (req, res) => {
-    try {
-        const { email } = req.body;
-
-        const userExists = await userModel.findOne({ email })
-
-        const code = generateId(5)
-
-        if (userExists) {
-            await authCode.updateOne({ _id: userExists.id }, { user: userExists, code, isUsed: false }, { upsert: true },)
-            return res.status(200).json({
-                message: "An otp code has been sent to your mail, kindly check it."
-            })
-        }
-        return res.status(403).json({ msg: "This account does not exit." })
 
     } catch (error) {
         return res.json({ msg: "Error in sync: Server error." });
@@ -102,6 +78,5 @@ const authenticateAccount = async (req, res) => {
 
 module.exports = {
     syncUserAccount,
-    signinAccount,
     authenticateAccount
 }
