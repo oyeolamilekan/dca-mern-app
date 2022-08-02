@@ -7,6 +7,7 @@ const mongoose = require("mongoose")
  * status:          transaction status
  * message:         error message if the transaction fails to execute.
  * total:           total transaction object.
+ * price:           price transaction object.
  * fea:             fee transaction object.
  * receive:         total amount user will recieve after successful transaction.
  */
@@ -28,6 +29,9 @@ const transactionSchema = mongoose.Schema({
         type: String
     },
     total: {
+        type: Map,
+    },
+    price: {
         type: Map,
     },
     fee: {

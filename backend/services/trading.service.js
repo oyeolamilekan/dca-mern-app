@@ -48,13 +48,14 @@ const processDCA = async (shedule) => {
         const amount = plan.amount;
         const response = await buyAsset(decryptedKey, plan.market.quote_unit, plan.market.base_unit, amount)
         if (response.status == "success") {
-            const { status, total, fee, receive } = response.data
+            const { status, total, fee, receive, price } = response.data
             await Transaction.create({
                 plan: plan.id,
                 transaction_id: response.data.id,
                 status,
                 total,
                 fee,
+                price,
                 receive,
             })
         } else {
