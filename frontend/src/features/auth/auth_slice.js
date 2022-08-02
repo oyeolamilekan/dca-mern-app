@@ -9,6 +9,7 @@ const initialState = {
     isError: false,
     isSuccess: false,
     isLoading: false,
+    data: {},
     message: ''
 }
 
@@ -40,7 +41,7 @@ export const authSlice = createSlice({
             state.isLoading = false
             state.isSuccess = false
             state.isError = false
-            state.message = {}
+            state.message = ''
         },
     },
     extraReducers: (builder) => {
@@ -63,7 +64,8 @@ export const authSlice = createSlice({
             .addCase(confirmOtp.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.user = action.payload
+                state.message = action.payload.message
+                state.user = action.payload.user
             })
             .addCase(confirmOtp.rejected, (state, action) => {
                 state.isLoading = false

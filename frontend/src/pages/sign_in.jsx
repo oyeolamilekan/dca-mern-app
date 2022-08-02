@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, useEffect } from "react"
 import { syncAuth, reset } from '../features/auth/auth_slice'
 import { useNavigate } from 'react-router-dom'
@@ -15,7 +14,7 @@ function SignIn() {
 
     const dispatch = useDispatch()
 
-    const { isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
+    const { isLoading, isError, isSuccess, message, user } = useSelector((state) => state.auth)
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -24,7 +23,7 @@ function SignIn() {
         })
         )
     }
-
+    
     const onSubmit = (e) => {
         e.preventDefault()
         const userData = {
@@ -35,8 +34,9 @@ function SignIn() {
     }
 
     useEffect(() => {
-        if (isSuccess) {
-            navigate("/confirm_login")
+
+        if (isSuccess || user) {
+            navigate("/dashboard")
         }
 
         if (isError) {
@@ -45,7 +45,7 @@ function SignIn() {
 
         dispatch(reset())
 
-    }, [ isLoading, isSuccess, isError, navigate, dispatch])
+    }, [user, isLoading, isSuccess, isError, navigate, dispatch])
     return (
         <div>
             <h2>

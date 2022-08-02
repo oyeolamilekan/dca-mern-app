@@ -47,24 +47,26 @@ const syncUserAccount = async (req, res) => {
 const authenticateAccount = async (req, res) => {
     try {
 
-        const { email, code } = req.body;
+        const { code } = req.body;
 
-        const userExists = await userModel.findOne({ email })
+        const authCodeObj = await authCode.findOne({ code }).populate("user")
 
-        if (!userExists) {
+        if (!authCodeObj) {
             return res.status(403).json({
                 message: "This account does not exit."
             })
         }
 
-        const authCodeObj = await authCode.findOne({ user: userExists.id, code })
-
-        if (authCodeObj.user.toString() === userExists.id && !authCodeObj.isUsed) {
+        if (!authCodeObj.isUsed) {
             await authCode.findByIdAndUpdate(authCodeObj.id, { isUsed: true },);
             return res.status(200).json({
                 data: {
-                    message: "Welcome comrade.",
-                    token: generateJwtToken(userExists.id),
+                    message: "Account synced.",
+                    user: {
+                        name: authCodeObj.user.name,
+                        email: authCodeObj.user.email,
+                        token: generateJwtToken(authCodeObj.user.id),
+                    }
                 }
             })
         }
