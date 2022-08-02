@@ -11,9 +11,8 @@ const updateTransactionWebhook = async (req, res) => {
     try {
         const data = req.body;
         switch (data.event) {
-            case 'instant_order.confirmed':
-            case 'instant_order.cancelled':
             case 'instant_order.done':
+            case 'instant_order.cancelled':
                 updateTransaction(data)
                 break;
             default:

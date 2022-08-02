@@ -9,13 +9,13 @@ const Quidax = require("quidax-node");
 // @access  Public
 const syncUserAccount = async (req, res) => {
     try {
-        const { key } = req.body;
+        const { secretKey } = req.body;
 
-        const quidax = new Quidax(key)
+        const quidax = new Quidax(secretKey)
 
         const userInfo = await quidax.users.getAccountDetails("me")
 
-        const encryptedApiKey = encrypt(key)
+        const encryptedApiKey = encrypt(secretKey)
 
         const { email, first_name, last_name } = userInfo.data
 
@@ -31,6 +31,8 @@ const syncUserAccount = async (req, res) => {
 
         const code = generateId(5)
 
+        console.log(code)
+
         await authCode.updateOne({ _id: user.id }, { user: user, code, isUsed: false }, { upsert: true },)
 
         res.status(201).json({
@@ -38,7 +40,7 @@ const syncUserAccount = async (req, res) => {
         })
 
     } catch (error) {
-        return res.json({ msg: "Error in sync: Server error." });
+        return res.status(500).json({ msg: "Error in sync: Server error." });
     }
 }
 

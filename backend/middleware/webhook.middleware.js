@@ -10,7 +10,7 @@ const protectWebook = async (req, res, next) => {
 
         if (webhookKey != process.env.WEBHOOKKEY) {
             res.status(500).json({
-                message: "Error in processing secrets."
+                message: "Not yet boss, no be me you go send back to my village."
             })
         }
         next()

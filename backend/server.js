@@ -14,11 +14,15 @@ const { requestMiddleware } = require("./middleware/request.middleware");
 
 const logger = require("./services/logging.service");
 
+const cors = require("cors");
+
 const port = process.env.PORT || 8000
 
 connectDB()
 
 const app = express()
+
+app.use(cors());
 
 app.use(express.json())
 

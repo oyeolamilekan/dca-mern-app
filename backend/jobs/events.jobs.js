@@ -2,7 +2,7 @@ const Bull = require("bull")
 
 /**
  * Add the mail event data to the mail-queue Queue.
- * this transaction will be executed in the background.
+ * this action will be executed in the background.
  * @param {*} data 
  */
 const sendMailEvent = async (data) => {
