@@ -8,8 +8,7 @@
     "setup": "node backend/fetchMarkets.js",
     "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
-    "client:build": "npm run build --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "client:build": "npm run build --prefix frontend"
   },
   "keywords": [
     "DCA",

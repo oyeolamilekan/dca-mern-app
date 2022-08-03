@@ -111,7 +111,6 @@ const fetchPlans = async (req, res) => {
         return res.status(200).send({ hits: goals.length, goals })
 
     } catch (error) {
-
         return res.status(500).json({ message: "Error in fetching plans." })
     }
 }
