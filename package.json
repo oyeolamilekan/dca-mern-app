@@ -6,6 +6,7 @@
   "scripts": {
     "test": "node backend/server.js",
     "setup": "node backend/fetchMarkets.js",
+    "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
     "client:build": "npm run build --prefix frontend"
