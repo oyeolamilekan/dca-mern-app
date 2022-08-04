@@ -1,12 +1,14 @@
 const Bull = require("bull")
 
+const REDIS_URL = process.env.REDIS_URL
+
 /**
  * Add the mail event data to the mail-queue Queue.
  * this action will be executed in the background.
  * @param {*} data 
  */
 const sendMailEvent = async (data) => {
-    const emailProcessingQueue = new Bull("mail-queue")
+    const emailProcessingQueue = new Bull("mail-queue", REDIS_URL)
     await emailProcessingQueue.add(data)
 }
 
@@ -16,7 +18,7 @@ const sendMailEvent = async (data) => {
  * @param {*} data 
  */
 const updateTransaction = async (data) => {
-    const transactionProcessingQueue = new Bull("instant-order-final-process")
+    const transactionProcessingQueue = new Bull("instant-order-final-process", REDIS_URL)
     await transactionProcessingQueue.add(data)
 }
 
