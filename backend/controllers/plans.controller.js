@@ -108,7 +108,7 @@ const fetchPlans = async (req, res) => {
 
         const plans = await Plans.find({ user: req.user.id, isActive: true }).skip(skip).limit(limit).select("-user").sort('-createdAt').populate("market")
 
-        return res.status(200).send({ hits: goals.length, plans })
+        return res.status(200).send({ hits: plans.length, plans })
 
     } catch (error) {
         console.log(error)
