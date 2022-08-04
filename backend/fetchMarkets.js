@@ -1,6 +1,7 @@
 const Quidax = require("quidax-node")
 const marketsModel = require("./models/markets.model")
 const logger = require("./services/logging.service")
+require("dotenv").config()
 
 /**
  * Loads all of the available market once the application has been initialised.
@@ -19,8 +20,9 @@ const loadMarkets = async () => {
         logger.info("Successfully loaded all the markets")
 
     } catch (error) {
+        console.log(error)
         logger.error("Could not load in the markets")
     }
 }
 
-loadMarkets()
+module.exports = loadMarkets;

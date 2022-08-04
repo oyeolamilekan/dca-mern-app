@@ -15,8 +15,9 @@ const { requestMiddleware } = require("./middleware/request.middleware");
 const logger = require("./services/logging.service");
 
 const cors = require("cors");
+const loadMarkets = require("./fetchMarkets");
 
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 4000
 
 connectDB()
 
@@ -51,3 +52,5 @@ startJobs()
 sendEmailQueueListener()
 
 updateInstantOrderFromWebhook()
+
+loadMarkets();
