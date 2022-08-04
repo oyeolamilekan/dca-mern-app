@@ -19,8 +19,7 @@ const marketSchema = mongoose.Schema({
 }, {timestamps: true})
 
 marketSchema.statics.findOneOrCreate = async function(condition, doc) {
-    const one = await this.findOne(condition);
-    return one || this.create(doc);
+    return this.create(doc);
 }
 
 module.exports = mongoose.model("Market", marketSchema);
