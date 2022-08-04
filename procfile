@@ -1,1 +1,2 @@
 web: node backend/server.js
+release: node backend/fetchMarkets.js
