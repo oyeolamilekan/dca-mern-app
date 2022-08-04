@@ -106,9 +106,9 @@ const fetchPlans = async (req, res) => {
 
         const skip = (page - 1) * limit;
 
-        const goals = await Plans.find({ user: req.user.id, isActive: true }).skip(skip).limit(limit).select("-user").sort('-createdAt').populate("market")
+        const plans = await Plans.find({ user: req.user.id, isActive: true }).skip(skip).limit(limit).select("-user").sort('-createdAt').populate("market")
 
-        return res.status(200).send({ hits: goals.length, goals })
+        return res.status(200).send({ hits: goals.length, plans })
 
     } catch (error) {
         return res.status(500).json({ message: "Error in fetching plans." })
