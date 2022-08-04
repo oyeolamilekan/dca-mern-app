@@ -53,6 +53,7 @@ const editPlan = async (req, res) => {
         res.status(200).send(updatedPlan)
 
     } catch (error) {
+        console.log(error)
         return res.status(500).json({ message: "Could not edit plan." })
     }
 
@@ -111,7 +112,6 @@ const fetchPlans = async (req, res) => {
         return res.status(200).send({ hits: plans.length, plans })
 
     } catch (error) {
-        console.log(error)
         return res.status(500).json({ message: "Error in fetching plans." })
     }
 }
