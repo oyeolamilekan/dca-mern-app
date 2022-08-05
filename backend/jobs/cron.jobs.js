@@ -1,12 +1,12 @@
 const cron = require('node-cron');
-const constants = require("../constants/cronsValues");
+const { DAILY, WEEKLY, MONTHLY } = require("../constants/crons.const");
 const logger = require('../services/logging.service');
 const { processDCA } = require('../services/trading.service');
 
 startJobs = () => {
 
     /// Execute the daily plans
-    cron.schedule(constants.DAILY, async () => {
+    cron.schedule(DAILY, async () => {
         try {
             processDCA("DAILY")
         } catch (error) {
@@ -16,7 +16,7 @@ startJobs = () => {
     });
 
     /// Execute the weekly plans
-    cron.schedule(constants.WEEKLY, async () => {
+    cron.schedule(WEEKLY, async () => {
         try {
             processDCA("WEEKLY")
         } catch (error) {
@@ -26,7 +26,7 @@ startJobs = () => {
     });
 
     /// Execute the monthly plans
-    cron.schedule(constants.MONTHLY, async () => {
+    cron.schedule(MONTHLY, async () => {
         try {
             processDCA("MONTHLY")
         } catch (error) {
