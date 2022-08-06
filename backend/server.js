@@ -40,7 +40,7 @@ app.use("/api/transaction", require("./routes/transaction.route"))
 
 app.use(errorHandler)
 
-app.use('*', function (req, res) {
+app.use('*', function (_, res) {
     res.status(404).json({ data: 'route not found' });
 });
 
