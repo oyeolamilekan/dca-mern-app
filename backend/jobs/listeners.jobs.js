@@ -1,5 +1,6 @@
 const Bull = require("bull")
 const transactionModel = require("../models/transaction.model")
+const logger = require("../services/logging.service")
 
 const REDIS_URL = process.env.REDIS_URL
 
@@ -10,6 +11,11 @@ const sendEmailQueueListener = async () => {
     const emailProcessingQueue = new Bull("mail-queue", REDIS_URL)
     emailProcessingQueue.process(async (jobs) => {
         await sendMail(jobs.data)
+    })
+    
+    emailProcessingQueue.on("global:completed", (job, result) => {
+        emailProcessingQueue.clean(0, "completed");
+        logger.info(`Job completed ${job} Result ${result}`)
     })
 }
 
@@ -24,6 +30,11 @@ const updateInstantOrderFromWebhook = async () => {
     const transactionProcessingQueue = new Bull("instant-order-final-process", REDIS_URL)
     transactionProcessingQueue.process(async (jobs) => {
         await processTransaction(jobs.data)
+    })
+
+    transactionProcessingQueue.on("global:completed", (job, result) => {
+        transactionProcessingQueue.clean(0, "completed");
+        logger.info(`Job completed ${job} Result ${result}`)
     })
 }
 
