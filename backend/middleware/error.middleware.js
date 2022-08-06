@@ -1,4 +1,4 @@
-const errorHandler = (err, _, res, _) => {
+const errorHandler = (err, _, res, __) => {
     if (err) {
 
         const statusCode = res.statusCode ? res.statusCode : 500
