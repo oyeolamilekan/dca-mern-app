@@ -50,7 +50,7 @@ const fetchTransaction = async (req, res) => {
 }
 
 /**
- * Fetchs transactions related to the plan.
+ * Fetchs all transaction created on the users account..
  * @param {*} req 
  * @param {*} res 
  * @returns 
