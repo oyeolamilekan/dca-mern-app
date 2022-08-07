@@ -2,11 +2,7 @@ const express = require("express");
 
 require("dotenv").config()
 
-const connectDB = require("./config/db");
-
-const startJobs = require("./jobs/cron.jobs");
-
-const { sendEmailQueueListener, updateInstantOrderFromWebhook } = require("./jobs/listeners.jobs");
+const connectDB = require("./config/db.config");
 
 const { errorHandler } = require("./middleware/error.middleware");
 
@@ -15,6 +11,8 @@ const { requestMiddleware } = require("./middleware/request.middleware");
 const logger = require("./services/logging.service");
 
 const cors = require("cors");
+
+const AppSetup = require("./services/setup.service");
 
 const port = process.env.PORT || 4000
 
@@ -46,8 +44,4 @@ app.use('*', function (_, res) {
 
 app.listen(port, () => logger.info(`Server started on port ${port}`))
 
-startJobs()
-
-sendEmailQueueListener()
-
-updateInstantOrderFromWebhook()
+AppSetup.setupServices()
