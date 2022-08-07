@@ -1,6 +1,6 @@
 const express = require("express");
 
-const dotenv = require("dotenv").config()
+require("dotenv").config()
 
 const connectDB = require("./config/db");
 
@@ -30,13 +30,13 @@ app.use(express.json())
 
 app.use(express.urlencoded({ extended: true }))
 
-app.use("/api/user", require("./routes/user.route"))
+app.use("/api/user", require("./routes/user.routes"))
 
-app.use("/api/markets", require("./routes/markets.route"))
+app.use("/api/markets", require("./routes/markets.routes"))
 
-app.use("/api/plan", require("./routes/plan.route"))
+app.use("/api/plan", require("./routes/plan.routes"))
 
-app.use("/api/transaction", require("./routes/transaction.route"))
+app.use("/api/transaction", require("./routes/transaction.routes"))
 
 app.use(errorHandler)
 
