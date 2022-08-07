@@ -30,7 +30,6 @@ const buyAsset = async (secretKey, bid, ask, total) => {
         const confirmInsantOrderObj = await quidax.instantOrder.confirmInstantOrder("me", instantOrderObj.data.id)
         return confirmInsantOrderObj;
     } catch (error) {
-        console.log(error)
         return { status: 'error', message: error }
     }
 
