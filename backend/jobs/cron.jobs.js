@@ -1,5 +1,5 @@
 const cron = require('node-cron');
-const { DAILY, WEEKLY, MONTHLY } = require("../constants/crons.const");
+const { DAILY, WEEKLY, MONTHLY, TESTING } = require("../constants/crons.const");
 const logger = require('../services/logging.service');
 const { processDCA } = require('../services/trading.service');
 
@@ -8,7 +8,7 @@ startJobs = () => {
     /// Execute the daily plans
     cron.schedule(DAILY, async () => {
         try {
-            processDCA("DAILY")
+            processDCA("TESTING")
         } catch (error) {
             logger.error(`Daily Cron failed in executing: ${error.message}`);
         }
