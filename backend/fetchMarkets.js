@@ -1,6 +1,7 @@
 const Quidax = require("quidax-node")
 const marketsModel = require("./models/markets.model")
 const logger = require("./services/logging.service")
+const connectDB = require("./config/db.config");
 require("dotenv").config()
 
 /**
@@ -8,6 +9,8 @@ require("dotenv").config()
  */
 const loadMarkets = async () => {
     try {
+
+        connectDB()
 
         const quidax = new Quidax(process.env.QUIDAX_SECRET_API)
 
@@ -19,10 +22,12 @@ const loadMarkets = async () => {
 
         logger.info("Successfully loaded all the markets")
 
+        process.exit(1);
+
     } catch (error) {
         console.log(error)
         logger.error("Could not load in the markets")
     }
 }
 
-module.exports = loadMarkets;
+loadMarkets();
