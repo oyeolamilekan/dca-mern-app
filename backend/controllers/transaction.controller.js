@@ -1,5 +1,4 @@
 const { updateTransaction } = require("../jobs/events.jobs");
-const plansModel = require("../models/plans.model");
 const transactionModel = require("../models/transaction.model");
 
 /**
@@ -71,7 +70,6 @@ const fetchAllTransaction = async (req, res) => {
         return res.status(200).json({ hits: transactions.length, transactions })
 
     } catch (error) {
-        console.log(error)
         return res.status(500).json({ msg: "Server error" })
     }
 }
