@@ -63,9 +63,24 @@ const fetchAllTransaction = async (req, res) => {
 
         const skip = (page - 1) * limit;
 
-        const transactions = await transactionModel.find({}).populate({
-            path: 'plan', match: { user: { $eq: req.user._id }, },
-        }).skip(skip).limit(limit).sort('-createdAt')
+        const transactions = await transactionModel.aggregate([
+            {
+                $lookup: {
+                    from: "plans",
+                    localField: "user",
+                    foreignField: "id",
+                    as: "plan",
+                },
+            },
+            { $unwind: "$plan" },
+            {
+                $match: {
+                    "plan.user": req.user._id
+                }
+            },
+            { $project: { "plan": 0 } }
+
+        ]).skip(skip).limit(limit).sort('-createdAt')
 
         return res.status(200).json({ hits: transactions.length, transactions })
 
