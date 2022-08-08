@@ -1,4 +1,5 @@
 const { updateTransaction } = require("../jobs/events.jobs");
+const plansModel = require("../models/plans.model");
 const transactionModel = require("../models/transaction.model");
 
 /**
@@ -63,11 +64,14 @@ const fetchAllTransaction = async (req, res) => {
 
         const skip = (page - 1) * limit;
 
-        const transactions = await transactionModel.find({ "Plans.User": req.user._id }).skip(skip).limit(limit).sort('-createdAt')
+        const transactions = await transactionModel.find({}).populate({
+            path: 'plan', match: { user: { $eq: req.user._id }, },
+        }).skip(skip).limit(limit).sort('-createdAt')
 
         return res.status(200).json({ hits: transactions.length, transactions })
 
     } catch (error) {
+        console.log(error)
         return res.status(500).json({ msg: "Server error" })
     }
 }
