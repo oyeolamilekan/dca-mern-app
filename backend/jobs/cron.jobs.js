@@ -6,9 +6,9 @@ const { processDCA } = require('../services/trading.service');
 startJobs = () => {
 
     /// Execute the daily plans
-    cron.schedule(DAILY, async () => {
+    cron.schedule(TESTING, async () => {
         try {
-            processDCA("TESTING")
+            processDCA("DAILY")
         } catch (error) {
             logger.error(`Daily Cron failed in executing: ${error.message}`);
         }
