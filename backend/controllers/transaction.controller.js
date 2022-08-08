@@ -41,7 +41,7 @@ const fetchTransaction = async (req, res) => {
 
         const { id } = req.params;
 
-        const transactions = await transactionModel.find({ plan: id }).skip(skip).limit(limit).sort('-createdAt')
+        const transactions = await transactionModel.find({ plan: id, status: { $in: ['confirm', 'done'] } }).skip(skip).limit(limit).sort('-createdAt')
 
         return res.status(200).json({ hits: transactions.length, transactions })
 
