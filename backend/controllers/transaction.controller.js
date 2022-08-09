@@ -65,6 +65,11 @@ const fetchAllTransaction = async (req, res) => {
 
         const transactions = await transactionModel.aggregate([
             {
+                $match: {
+                    "status": { $in: ['confirm', 'done'] }
+                }
+            },
+            {
                 $lookup: {
                     from: "plans",
                     localField: "user",
