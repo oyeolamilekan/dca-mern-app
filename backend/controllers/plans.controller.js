@@ -104,7 +104,7 @@ const fetchPlans = async (req, res) => {
 
         const { data, pagination } = await Plans.find({ user: req.user.id }).populate("market").paginate({ page: page })
 
-        return res.status(200).send({ plans: data, pagination })
+        return res.status(200).send({ pagination, plans: data })
 
     } catch (error) {
         return res.status(500).json({ message: "Error in fetching plans." })
