@@ -18,10 +18,13 @@ const protect = async (req, res, next) => {
 
             // Get user from the token
             req.user = await User.findById(decoded.id).select('-password').select("-__v")
+            if (req.user == null) {
+                throw Error("User does not exit.")
+            }
             next()
         } catch (error) {
             res.status(401).json({
-                message: "Not Unauthcorized"
+                message: error.message
             })
         }
     }

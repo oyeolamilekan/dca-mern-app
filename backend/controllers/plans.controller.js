@@ -106,7 +106,7 @@ const fetchPlans = async (req, res) => {
 
         const skip = (page - 1) * limit;
 
-        const plans = await Plans.find({ user: req.user.id }).skip(skip).limit(limit).select("-user").sort('-createdAt').populate("market")
+        const plans = await Plans.find({ user: req.user.id }).paginate({ page: page })
 
         return res.status(200).send({ hits: plans.length, plans })
 

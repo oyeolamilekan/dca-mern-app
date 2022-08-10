@@ -1,4 +1,5 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const PaginatePlugin = require("../plugins/pagination.plugin");
 /**
  * Transactions schema records every trade executed by the plans
  * 
@@ -42,5 +43,7 @@ const transactionSchema = mongoose.Schema({
     }
     
 }, { timestamps: true })
+
+transactionSchema.plugin(PaginatePlugin, { limit: 10 })
 
 module.exports = mongoose.model("Transaction", transactionSchema);

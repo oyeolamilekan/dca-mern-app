@@ -1,4 +1,5 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const PaginatePlugin = require("../plugins/pagination.plugin");
 
 /**
  * Plans schema containing information about the trading strategy
@@ -41,5 +42,7 @@ const plansSchema = mongoose.Schema({
         required: [true, "Please add a schedule"],
     },
 }, { timestamps: true })
+
+plansSchema.plugin(PaginatePlugin, { limit: 10 })
 
 module.exports = mongoose.model("Plans", plansSchema);

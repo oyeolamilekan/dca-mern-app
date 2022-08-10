@@ -40,9 +40,9 @@ const fetchTransaction = async (req, res) => {
 
         const { id } = req.params;
 
-        const transactions = await transactionModel.find({ plan: id, status: { $in: ['confirm', 'done'] } }).skip(skip).limit(limit).sort('-createdAt')
+        const { data, pagination } = await transactionModel.find({ plan: id, status: { $in: ['confirm', 'done'] } }).paginate({ page: page })
 
-        return res.status(200).json({ hits: transactions.length, transactions })
+        return res.status(200).json({ pagination, data })
 
     } catch (error) {
         return res.status(500).json({ msg: "Server error" })
