@@ -102,7 +102,7 @@ const fetchPlans = async (req, res) => {
     try {
         const page = Number(req.query.page) || 1;
 
-        const { data, pagination } = await Plans.find({ user: req.user.id }).paginate({ page: page })
+        const { data, pagination } = await Plans.find({ user: req.user.id }).populate("market").paginate({ page: page })
 
         return res.status(200).send({ plans: data, pagination })
 
