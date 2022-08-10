@@ -102,9 +102,9 @@ const fetchPlans = async (req, res) => {
     try {
         const page = Number(req.query.page) || 1;
 
-        const plans = await Plans.find({ user: req.user.id }).paginate({ page: page })
+        const { data, pagination } = await Plans.find({ user: req.user.id }).paginate({ page: page })
 
-        return res.status(200).send({ hits: plans.length, plans })
+        return res.status(200).send({ plans: data, pagination })
 
     } catch (error) {
         return res.status(500).json({ message: "Error in fetching plans." })
