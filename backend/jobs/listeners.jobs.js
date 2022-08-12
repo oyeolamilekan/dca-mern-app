@@ -1,8 +1,7 @@
 const Bull = require("bull")
+const { REDIS_URL } = require("../constants/db.const")
 const transactionModel = require("../models/transaction.model")
 const logger = require("../services/logging.service")
-
-const REDIS_URL = process.env.REDIS_URL
 
 /**
  * Process the data that has been added to the 'mail-queue'

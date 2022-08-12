@@ -1,4 +1,5 @@
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../constants/auth.const");
 
 const User = require("../models/user.model");
 
@@ -14,7 +15,7 @@ const protect = async (req, res, next) => {
             let token = req.headers.authorization.split(" ")[1]
 
             // verify token
-            const decoded = jwt.verify(token, process.env.JWT_SECRET)
+            const decoded = jwt.verify(token, JWT_SECRET)
 
             // Get user from the token
             req.user = await User.findById(decoded.id).select('-password').select("-__v")

@@ -1,6 +1,5 @@
 const Bull = require("bull")
-
-const REDIS_URL = process.env.REDIS_URL
+const { REDIS_URL } = require("../constants/db.const")
 
 /**
  * Add the mail event data to the mail-queue Queue.

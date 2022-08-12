@@ -2,7 +2,7 @@ const Quidax = require("quidax-node")
 const marketsModel = require("./models/markets.model")
 const logger = require("./services/logging.service")
 const connectDB = require("./config/db.config");
-require("dotenv").config()
+const { QUIDAX_SECRET_API } = require("./constants/auth.const");
 
 /**
  * Loads all of the available market once the application has been initialised.
@@ -12,7 +12,7 @@ const loadMarkets = async () => {
 
         connectDB()
 
-        const quidax = new Quidax(process.env.QUIDAX_SECRET_API)
+        const quidax = new Quidax(QUIDAX_SECRET_API)
 
         const markets = await quidax.markets.listAllMarkets()
 

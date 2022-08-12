@@ -28,3 +28,17 @@ DCA core features include:
         - `QUIDAX_SECRET_API = <QUIDAX_SECRET_API>`
         - `WEBHOOKKEY = <WEBHOOKKEY>`
         - `REDIS_URL = <REDIS_URL>`
+    - Setup markets `npm run setup`
+- Run the app locally `npm run server`
+
+## APP STRUCTURE
+
+- config: This directory stores all of the configuration for the app.
+- constants: This directory stores constants for the application.
+- controllers: This directory stores all business logic.
+- jobs: This folder contains all cron and backgroud jobs.
+- middleware: 
+- models:
+- plugins:
+- routes:
+- services:

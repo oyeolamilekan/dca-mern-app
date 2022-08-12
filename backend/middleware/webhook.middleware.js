@@ -1,3 +1,5 @@
+const { WEBHOOKKEY } = require("../constants/webhook.const")
+
 /**
  * Webhook middle protect the webhook route, from authenticated request.
  * @param {*} req 
@@ -8,7 +10,7 @@ const protectWebook = async (req, res, next) => {
     try {
         let webhookKey = req.headers['quidax-signature']
 
-        if (webhookKey != process.env.WEBHOOKKEY) {
+        if (webhookKey != WEBHOOKKEY) {
             res.status(500).json({
                 message: "Not yet boss, no be me you go send back to my village."
             })
