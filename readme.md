@@ -18,13 +18,13 @@ DCA core features include:
 - `install npm on the app`
 - Configure Server
     - Create `.env`
-    - Update `.env` with the current attributs
-        `NODE_ENV = development`
-        `PORT = <PORT>`
-        `MONGO_URI = <MONGO_URI>`
-        `JWT_SECRET = <JWT_SECRET>`
-        `ENCRYPTION_KEY = <ENCRYPTION_KEY>` string must be 32 in length
-        `ENCRYPTION_IV = <ENCRYPTION_IV>` string must be 16 in length
-        `QUIDAX_SECRET_API = <QUIDAX_SECRET_API>`
-        `WEBHOOKKEY = <WEBHOOKKEY>`
-        `REDIS_URL = <REDIS_URL>`
+    - Update `.env` with the current attributes
+        - `NODE_ENV = development`
+        - `PORT = <PORT>`
+        - `MONGO_URI = <MONGO_URI>`
+        - `JWT_SECRET = <JWT_SECRET>`
+        - `ENCRYPTION_KEY = <ENCRYPTION_KEY>` string must be 32 in length
+        - `ENCRYPTION_IV = <ENCRYPTION_IV>` string must be 16 in length
+        - `QUIDAX_SECRET_API = <QUIDAX_SECRET_API>`
+        - `WEBHOOKKEY = <WEBHOOKKEY>`
+        - `REDIS_URL = <REDIS_URL>`
