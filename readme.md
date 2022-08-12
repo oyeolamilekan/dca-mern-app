@@ -1,6 +1,6 @@
 # DCA core
 
-DCA is an app that automatically schedules purchase of crypto assets from QUIDAX exchage.
+This app automatically buys crypto on your behalf on Quidax using their API while you sit back, relax and enjoy a cold one.
 
 ## Features
 
