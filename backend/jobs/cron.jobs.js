@@ -3,6 +3,9 @@ const { DAILY, WEEKLY, MONTHLY } = require("../constants/crons.const");
 const logger = require('../services/logging.service');
 const { processDCA } = require('../services/trading.service');
 
+/**
+ * Starts scheduled cron jobs
+ */
 startJobs = () => {
 
     /// Execute the daily plans

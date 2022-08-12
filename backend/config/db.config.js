@@ -2,6 +2,9 @@ const mongoose = require("mongoose")
 const { MONGO_URI } = require("../constants/db.const")
 const logger = require("../services/logging.service")
 
+/**
+ * Connects to the mongo db database
+ */
 const connectDB = async () => {
     await mongoose.connect(MONGO_URI,
         {

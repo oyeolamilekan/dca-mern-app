@@ -2,8 +2,6 @@ const express = require("express");
 
 require("dotenv").config()
 
-const connectDB = require("./config/db.config");
-
 const { errorHandler } = require("./middleware/error.middleware");
 
 const { requestMiddleware } = require("./middleware/request.middleware");
@@ -14,9 +12,9 @@ const cors = require("cors");
 
 const AppSetup = require("./services/setup.service");
 
-const port = process.env.PORT || 4000
+AppSetup.setupServices()
 
-connectDB()
+const port = process.env.PORT || 4000
 
 const app = express()
 
@@ -43,5 +41,3 @@ app.use('*', function (_, res) {
 });
 
 app.listen(port, () => logger.info(`Server started on port ${port}`))
-
-AppSetup.setupServices()
