@@ -44,6 +44,6 @@ const transactionSchema = mongoose.Schema({
     
 }, { timestamps: true })
 
-transactionSchema.plugin(PaginatePlugin, { limit: 10 })
+transactionSchema.plugin(PaginatePlugin, { limit: 20 })
 
 module.exports = mongoose.model("Transaction", transactionSchema);
