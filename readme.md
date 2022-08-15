@@ -37,8 +37,8 @@ DCA core features include:
 - constants: This directory stores constants for the application.
 - controllers: This directory stores all business logic.
 - jobs: This folder contains all cron and backgroud jobs.
-- middleware: 
-- models:
-- plugins:
-- routes:
-- services:
+- middleware: This folder contains all application level middleware
+- models: This folder contains data models for the application.
+- plugins: This folder contains all custom plugins written for the application
+- routes: This folder contains application level routes
+- services: This folder contains all application services
