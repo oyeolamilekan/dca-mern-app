@@ -1,7 +1,7 @@
 const { createLogger, transports, format } = require('winston');
 
 const customFormat = format.combine(format.timestamp(), format.printf((info) => {
-  return `${info.timestamp} [${info.level.toUpperCase()}]: ${info.message}`
+  return `${info.timestamp} [${info.level.toUpperCase()}]: {"message": ${info.message}}`
 }))
 
 let today = new Date().toISOString().slice(0, 10)

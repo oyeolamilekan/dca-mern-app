@@ -35,6 +35,29 @@ const buyAsset = async (secretKey, bid, ask, total) => {
 
 
 }
+/**
+ * get quotes of units
+ * @param {string} secretKey 
+ * @param {string} name 
+ * @param {string} bid 
+ * @param {string} ask 
+ * @param {double} total 
+ * @returns 
+ */
+const getQuotes = async (secretKey, name, bid, total) => {
+    try {
+        const quidax = new Quidax(secretKey)
+        const quotesData = await quidax.quotes.quote({ 
+            market: name,
+            unit: bid, 
+            kind: "bid", 
+            total: total
+        })
+        return quotesData
+    } catch (error) {
+        return { status: 'error', message: error }
+    }
+}
 
 /**
  * Process the DCA plans on behalf of the user
@@ -45,8 +68,8 @@ const processDCA = async (shedule) => {
     plans.forEach(async (plan) => {
         const decryptedKey = decrypt(plan.user.encryptedApiKey)
         const { amount } = plan;
-        const { quote_unit, base_unit } = plan.market;
-        const response = await buyAsset(decryptedKey, quote_unit, base_unit, amount)
+        const { quote_unit, base_unit, name } = plan.market;
+        const response = await buyAsset(decryptedKey, name, quote_unit, amount)
         if (response.status == "success") {
             const { status, total, fee, receive, price, id } = response.data
             await Transaction.create({
@@ -59,8 +82,14 @@ const processDCA = async (shedule) => {
                 receive,
             })
         } else {
+            const quotesResponse = await getQuotes(decryptedKey, name, quote_unit, base_unit, amount)
+            const { total, fee, receive, price } = quotesResponse.data
             await Transaction.create({
                 plan: plan.id,
+                total,
+                fee,
+                price,
+                receive,
                 status: response.status,
                 message: response.message
             })
@@ -69,4 +98,4 @@ const processDCA = async (shedule) => {
 }
 
 
-module.exports = { buyAsset, processDCA }
+module.exports = { processDCA }
