@@ -69,7 +69,7 @@ const processDCA = async (shedule) => {
         const decryptedKey = decrypt(plan.user.encryptedApiKey)
         const { amount } = plan;
         const { quote_unit, base_unit, name } = plan.market;
-        const response = await buyAsset(decryptedKey, name, quote_unit, amount)
+        const response = await buyAsset(decryptedKey, quote_unit, base_unit, amount)
         if (response.status == "success") {
             const { status, total, fee, receive, price, id } = response.data
             await Transaction.create({
@@ -82,8 +82,8 @@ const processDCA = async (shedule) => {
                 receive,
             })
         } else {
-            const quotesResponse = await getQuotes(decryptedKey, name, quote_unit, base_unit, amount)
-            const { total, fee, receive, price } = quotesResponse.data
+            const quotesData = await getQuotes(decryptedKey, name, quote_unit, amount)
+            const { total, fee, receive, price } = quotesData.data
             await Transaction.create({
                 plan: plan.id,
                 total,
