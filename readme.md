@@ -15,7 +15,7 @@ DCA core features include:
 ## Installation
 
 - `git clone <this_url> && cd <repo_name>`
-- `install npm on the app`
+- Run `npm install`
 - Configure Server
     - Create `.env`
     - Update `.env` with the current attributes
