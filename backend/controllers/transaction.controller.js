@@ -36,7 +36,7 @@ const fetchTransaction = async (req, res) => {
 
         const { id } = req.params;
 
-        const { data, pagination } = await transactionModel.find({ plan: id, status: { $in: ['confirm', 'done'] } }).sort('-createdAt').paginate({ page: page })
+        const { data, pagination } = await transactionModel.find({ plan: id, status: { $in: ['confirm', 'done', 'error'] } }).sort('-createdAt').paginate({ page: page })
 
         return res.status(200).json({ pagination, transactions: data })
 
