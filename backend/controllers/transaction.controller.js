@@ -62,7 +62,7 @@ const fetchAllTransaction = async (req, res) => {
         const transactions = await transactionModel.aggregate([
             {
                 $match: {
-                    "status": { $in: ['confirm', 'done', 'error'] }
+                    "status": { $in: ['confirm', 'done'] }
                 }
             },
             {
