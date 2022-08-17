@@ -79,9 +79,10 @@ const fetchAllTransaction = async (req, res) => {
                     "plan.user": req.user._id
                 }
             },
+            { $sort: { createdAt: -1 } },
             { $project: { "plan": 0 } }
 
-        ]).skip(skip).limit(limit).sort('createdAt')
+        ]).skip(skip).limit(limit)
 
         return res.status(200).json({ hits: transactions.length, transactions })
 
