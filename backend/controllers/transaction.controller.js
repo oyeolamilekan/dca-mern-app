@@ -61,11 +61,6 @@ const fetchAllTransaction = async (req, res) => {
 
         const transactions = await transactionModel.aggregate([
             {
-                $match: {
-                    "status": { $in: ['confirm', 'done'] }
-                }
-            },
-            {
                 $lookup: {
                     from: "plans",
                     localField: "user",
@@ -79,8 +74,9 @@ const fetchAllTransaction = async (req, res) => {
                     "plan.user": req.user._id
                 }
             },
+            { $group: { "_id": "$_id", doc: { "$first": "$$ROOT" } } },
+            { $replaceRoot: { newRoot: "$doc" } },
             { $sort: { createdAt: -1 } },
-            { $project: { "plan": 0 } }
 
         ]).skip(skip).limit(limit)
 
