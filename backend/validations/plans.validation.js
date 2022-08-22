@@ -5,7 +5,7 @@ module.exports = {
         body: Joi.object({
             name: Joi.string().required(),
             market: Joi.string().required(),
-            amount: Joi.number().min(1),
+            amount: Joi.number().min(0.01),
             schedule: Joi.string().valid(...['DAILY', 'WEEKLY', 'MONTHLY'])
         }),
     },
@@ -13,14 +13,13 @@ module.exports = {
     editPlanValidator: {
         body: Joi.object({
             name: Joi.string().required(),
-            amount: Joi.number().min(1),
+            amount: Joi.number().min(0.01),
             schedule: Joi.string().valid(...['DAILY', 'WEEKLY', 'MONTHLY'])
         }),
     },
 
     togglePlanValidator: {
         body: Joi.object({
-            id: Joi.string().required(),
             isActive: Joi.boolean().required(),
         }),
     },
