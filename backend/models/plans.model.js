@@ -43,6 +43,6 @@ const plansSchema = mongoose.Schema({
     },
 }, { timestamps: true })
 
-plansSchema.plugin(PaginatePlugin, { limit: 20 })
+plansSchema.plugin(PaginatePlugin, { limit: 30 })
 
 module.exports = mongoose.model("Plans", plansSchema);
