@@ -33,6 +33,8 @@ const syncUserAccount = async (req, res) => {
 
         console.log(code)
 
+        await userModel.updateOne({ email: user.email }, { "encryptedApiKey": encryptedApiKey })
+
         await authCode.updateOne({ _id: user.id }, { user: user, code, isUsed: false }, { upsert: true },)
 
         res.status(201).json({
