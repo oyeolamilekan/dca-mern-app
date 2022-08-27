@@ -62,7 +62,7 @@ const fetchAllTransaction = async (req, res) => {
         const transactions = await transactionModel.aggregate([
             {
                 $lookup: {
-                    from: "plan",
+                    from: "plans",
                     localField: "user",
                     foreignField: "id",
                     as: "plan",
